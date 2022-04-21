@@ -56,4 +56,34 @@ public class BookController {
 		return mav;  
 	}
 	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ModelAndView updatePost(@RequestParam Map<String, Object> map) {
+		boolean isUpdate = this.bookService.edit(map);
+		
+		ModelAndView mav = new ModelAndView();
+		if ( isUpdate ) {
+			String bookId = map.get("bookId").toString();
+			mav.setViewName("redirect:/detail?bookId=" + bookId);
+		} else {
+			mav = this.update(map);
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView deletePost(@RequestParam Map<String, Object> map) {
+		boolean isDelete = this.bookService.delete(map);
+		
+		ModelAndView mav = new ModelAndView();
+		if ( isDelete ) {
+			mav.setViewName("redirect:/list");
+		} else {
+			String bookId = map.get("bookId").toString();
+			mav.setViewName("redirect:/detail?bookId=" + bookId);
+		}
+		
+		return mav;
+	}
+	
 }

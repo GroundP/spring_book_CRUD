@@ -14,7 +14,7 @@
   <p>
    <a href="/update?bookId=${bookId}">수정</a>
   </p>
-  <form method="POST" action="/delete">
+  <form method="GET" action="/delete">
    <input type="hidden" name="bookId" value="${bookId}" />
    <input type="submit" value="삭제" />
   </form>
