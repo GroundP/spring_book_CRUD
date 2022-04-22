@@ -1,4 +1,5 @@
 package first.spring.ex;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,21 @@ public class BookController {
 			mav.setViewName("redirect:/detail?bookId=" + bookId);
 		}
 		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView showList(@RequestParam Map<String, Object> map) {
+		List<Map<String, Object>> list = this.bookService.showList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data", list);
+		
+		if (map.containsKey("keyword")) {
+			mav.addObject("keyword", map.get("keyword"));
+		}
+		
+		mav.setViewName("/book/list");
 		return mav;
 	}
 	

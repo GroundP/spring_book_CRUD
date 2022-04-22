@@ -1,5 +1,6 @@
 package first.spring.ex;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BookService {
@@ -11,5 +12,7 @@ public interface BookService {
 	boolean edit(Map<String, Object> map);
 
 	boolean delete(Map<String, Object> map);
+
+	List<Map<String, Object>> showList(Map<String, Object> map);
 
 }
